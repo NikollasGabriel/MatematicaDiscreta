@@ -8,6 +8,7 @@ package view;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -19,9 +20,9 @@ import model.ManipulaArquivo;
  */
 public class Conjuntos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Conjuntos
-     */
+    private DefaultListModel modelElementos = new DefaultListModel();
+    private DefaultListModel modelConjuntos = new DefaultListModel();
+
     public Conjuntos() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -36,21 +37,34 @@ public class Conjuntos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        abrirArquivo = new javax.swing.JButton();
+        jMenuItem1 = new javax.swing.JMenuItem();
         enderecoArquivo = new javax.swing.JTextField();
         voltar = new javax.swing.JButton();
-        jMenuBar2 = new javax.swing.JMenuBar();
-        menu = new javax.swing.JMenu();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaElementos = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaConjuntos = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        Menu = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
+        abrir = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        pertence = new javax.swing.JMenuItem();
+        naoPertence = new javax.swing.JMenuItem();
+        contidoOuIgual = new javax.swing.JMenuItem();
+        naoContidoOuIgual = new javax.swing.JMenuItem();
+        contidoPropriamente = new javax.swing.JMenuItem();
+        naoContidoPropriamente = new javax.swing.JMenuItem();
+        uniao = new javax.swing.JMenuItem();
+        intersecao = new javax.swing.JMenuItem();
+        produtoCartesiano = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        abrirArquivo.setText("Abrir");
-        abrirArquivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                abrirArquivoActionPerformed(evt);
-            }
-        });
 
         voltar.setText("Voltar");
         voltar.addActionListener(new java.awt.event.ActionListener() {
@@ -59,28 +73,94 @@ public class Conjuntos extends javax.swing.JFrame {
             }
         });
 
-        menu.setText("File");
-        jMenuBar2.add(menu);
+        listaElementos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jScrollPane1.setViewportView(listaElementos);
 
-        jMenu5.setText("Edit");
-        jMenuBar2.add(jMenu5);
+        jLabel1.setText("Lista de Conjuntos Existentes");
 
-        setJMenuBar(jMenuBar2);
+        listaConjuntos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jScrollPane2.setViewportView(listaConjuntos);
+
+        jLabel2.setText("Lista de Elementos Existentes");
+
+        jTextField1.setText("jTextField1");
+
+        jTextField2.setText("jTextField2");
+
+        jMenu5.setText("File");
+
+        abrir.setText("Abrir");
+        abrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirActionPerformed(evt);
+            }
+        });
+        jMenu5.add(abrir);
+
+        Menu.add(jMenu5);
+
+        jMenu1.setText("Operações");
+
+        pertence.setText("Pertence");
+        jMenu1.add(pertence);
+
+        naoPertence.setText("Não Pertence");
+        jMenu1.add(naoPertence);
+
+        contidoOuIgual.setText("Contido ou Igual");
+        jMenu1.add(contidoOuIgual);
+
+        naoContidoOuIgual.setText("Não Contido ou Igual");
+        jMenu1.add(naoContidoOuIgual);
+
+        contidoPropriamente.setText("Contido Propriamente");
+        jMenu1.add(contidoPropriamente);
+
+        naoContidoPropriamente.setText("Não Contido Propriamente");
+        jMenu1.add(naoContidoPropriamente);
+
+        uniao.setText("União");
+        jMenu1.add(uniao);
+
+        intersecao.setText("Interseção");
+        jMenu1.add(intersecao);
+
+        produtoCartesiano.setText("Produto Cartesiano");
+        jMenu1.add(produtoCartesiano);
+
+        Menu.add(jMenu1);
+
+        setJMenuBar(Menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(voltar))
             .addGroup(layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(54, 54, 54))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(enderecoArquivo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(voltar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(abrirArquivo)
-                        .addGap(0, 266, Short.MAX_VALUE)))
+                    .addComponent(enderecoArquivo, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(6, 6, 6)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -88,17 +168,32 @@ public class Conjuntos extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(enderecoArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(abrirArquivo)
-                    .addComponent(voltar))
-                .addContainerGap())
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addComponent(voltar))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void abrirArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirArquivoActionPerformed
+    private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
+        Index tela = new Index();
+        tela.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_voltarActionPerformed
+
+    private void abrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirActionPerformed
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filtroTXT = new FileNameExtensionFilter("Arquivos TXT", "txt");
         chooser.addChoosableFileFilter(filtroTXT);
@@ -116,13 +211,7 @@ public class Conjuntos extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(null, "Arquivo gravado com sucesso");
         }
-    }//GEN-LAST:event_abrirArquivoActionPerformed
-
-    private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
-        Index tela = new Index();
-        tela.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_voltarActionPerformed
+    }//GEN-LAST:event_abrirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,11 +249,29 @@ public class Conjuntos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton abrirArquivo;
+    private javax.swing.JMenuBar Menu;
+    private javax.swing.JMenuItem abrir;
+    private javax.swing.JMenuItem contidoOuIgual;
+    private javax.swing.JMenuItem contidoPropriamente;
     private javax.swing.JTextField enderecoArquivo;
+    private javax.swing.JMenuItem intersecao;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenu menu;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JList<String> listaConjuntos;
+    private javax.swing.JList<String> listaElementos;
+    private javax.swing.JMenuItem naoContidoOuIgual;
+    private javax.swing.JMenuItem naoContidoPropriamente;
+    private javax.swing.JMenuItem naoPertence;
+    private javax.swing.JMenuItem pertence;
+    private javax.swing.JMenuItem produtoCartesiano;
+    private javax.swing.JMenuItem uniao;
     private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
 }
