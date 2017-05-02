@@ -5,14 +5,12 @@
  */
 package view;
 
-import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import model.ManipuladorDeArquivo;
 import model.ManipulaArquivo;
 
 /**
@@ -41,11 +39,9 @@ public class Conjuntos extends javax.swing.JFrame {
         abrirArquivo = new javax.swing.JButton();
         enderecoArquivo = new javax.swing.JTextField();
         voltar = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        menu = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,20 +59,13 @@ public class Conjuntos extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("File");
+        menu.setText("File");
+        jMenuBar2.add(menu);
 
-        jMenuItem1.setText("Abrir");
-        jMenu1.add(jMenuItem1);
+        jMenu5.setText("Edit");
+        jMenuBar2.add(jMenu5);
 
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("jMenu3");
-        jMenuBar1.add(jMenu3);
-
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,11 +162,9 @@ public class Conjuntos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirArquivo;
     private javax.swing.JTextField enderecoArquivo;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenu menu;
     private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
 }
