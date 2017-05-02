@@ -5,24 +5,15 @@
  */
 package view;
 
-<<<<<<< HEAD
 import java.io.IOException;
-=======
 import java.io.FileNotFoundException;
->>>>>>> 21245272a525ba0957c3ab87f24da322a77ff478
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-<<<<<<< HEAD
 import model.ManipuladorDeArquivo;
-=======
 import model.ManipulaArquivo;
-
-
-
->>>>>>> 21245272a525ba0957c3ab87f24da322a77ff478
 
 /**
  *
