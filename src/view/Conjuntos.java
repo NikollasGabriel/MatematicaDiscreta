@@ -5,13 +5,24 @@
  */
 package view;
 
+<<<<<<< HEAD
 import java.io.IOException;
+=======
+import java.io.FileNotFoundException;
+>>>>>>> 21245272a525ba0957c3ab87f24da322a77ff478
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+<<<<<<< HEAD
 import model.ManipuladorDeArquivo;
+=======
+import model.ManipulaArquivo;
+
+
+
+>>>>>>> 21245272a525ba0957c3ab87f24da322a77ff478
 
 /**
  *
@@ -36,25 +47,45 @@ public class Conjuntos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        abrirArquivo = new javax.swing.JButton();
         enderecoArquivo = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        voltar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Import");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        abrirArquivo.setText("Abrir");
+        abrirArquivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                abrirArquivoActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Voltar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        voltar.setText("Voltar");
+        voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                voltarActionPerformed(evt);
             }
         });
+
+        jMenu1.setText("File");
+
+        jMenuItem1.setText("Abrir");
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("jMenu3");
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,10 +97,10 @@ public class Conjuntos extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addComponent(enderecoArquivo))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(voltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addGap(0, 257, Short.MAX_VALUE)))
+                        .addComponent(abrirArquivo)
+                        .addGap(0, 266, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -77,17 +108,17 @@ public class Conjuntos extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(enderecoArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(abrirArquivo)
+                    .addComponent(voltar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void abrirArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirArquivoActionPerformed
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filtroTXT = new FileNameExtensionFilter("Arquivos TXT", "txt");
         chooser.addChoosableFileFilter(filtroTXT);
@@ -98,15 +129,20 @@ public class Conjuntos extends javax.swing.JFrame {
                 caminho += ".txt";
             }
             enderecoArquivo.setText(caminho);
+            try {
+                ManipulaArquivo.lerArquivo(caminho);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Conjuntos.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog(null, "Arquivo gravado com sucesso");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_abrirArquivoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         Index tela = new Index();
         tela.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_voltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,8 +180,13 @@ public class Conjuntos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton abrirArquivo;
     private javax.swing.JTextField enderecoArquivo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
 }
