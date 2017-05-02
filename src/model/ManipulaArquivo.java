@@ -10,7 +10,7 @@ import model.PadraoLeitura.*;
 
 public class ManipulaArquivo {
 
-    public static ArrayList lerArquivo(String caminhoArquivo) throws FileNotFoundException {
+    public static ArrayList<String> lerArquivo(String caminhoArquivo) throws FileNotFoundException {
         
         InputStream caminhoBuffer = new BufferedInputStream(new FileInputStream(caminhoArquivo));
         Scanner leitor = new Scanner(caminhoBuffer);
@@ -20,7 +20,7 @@ public class ManipulaArquivo {
             arquivo.add(leitor.nextLine());
         }
         //System.out.println(arquivo.get(arquivo.size()-1));
-        PadraoLeitura.identificaPadrao(arquivo);
+        //PadraoLeitura.identificaPadrao(arquivo);
         return arquivo;
     }
 

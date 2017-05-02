@@ -6,6 +6,8 @@
 package view;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -13,6 +15,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import model.ManipulaArquivo;
+import model.PadraoLeitura;
 
 /**
  *
@@ -140,11 +143,11 @@ public class Conjuntos extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(voltar))
             .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
+                .addGap(86, 86, 86)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(54, 54, 54))
+                .addGap(74, 74, 74))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,7 +208,29 @@ public class Conjuntos extends javax.swing.JFrame {
             }
             enderecoArquivo.setText(caminho);
             try {
-                ManipulaArquivo.lerArquivo(caminho);
+                
+                ArrayList<String> arquivoLido = ManipulaArquivo.lerArquivo(caminho);
+                
+                //<editor-fold defaultstate="collapsed" desc="Elementos">
+                ArrayList<String> elementos = PadraoLeitura.identificaElemento(arquivoLido);
+                modelElementos.removeAllElements();
+                listaElementos.setModel(modelElementos);
+                Iterator<String> elementosInterador = elementos.iterator();
+                while (elementosInterador.hasNext()) {
+                    modelElementos.addElement(elementosInterador.next());
+                }
+                //</editor-fold>
+                
+                //<editor-fold defaultstate="collapsed" desc="Conjuntos">
+                ArrayList<String> conjuntos = PadraoLeitura.identificaConjunto(arquivoLido);
+                modelConjuntos.removeAllElements();
+                listaConjuntos.setModel(modelConjuntos);
+                Iterator<String> conjuntosInterador = conjuntos.iterator();
+                while (conjuntosInterador.hasNext()) {
+                    modelConjuntos.addElement(conjuntosInterador.next());
+                }
+                //</editor-fold>
+                
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Conjuntos.class.getName()).log(Level.SEVERE, null, ex);
             }
