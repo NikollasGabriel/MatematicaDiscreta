@@ -5,14 +5,8 @@
  */
 package view;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
-import static java.nio.file.Files.list;
-import static java.rmi.Naming.list;
 import java.util.ArrayList;
-import static java.util.Collections.list;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +15,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import model.ManipulaArquivo;
+import model.Operacoes;
 import model.PadraoLeitura;
 
 /**
@@ -55,9 +50,10 @@ public class Conjuntos extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         listaConjuntos = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
-        primeiro = new javax.swing.JTextField();
-        segundo = new javax.swing.JTextField();
-        teste = new javax.swing.JCheckBox();
+        campoUm = new javax.swing.JTextField();
+        campoDois = new javax.swing.JTextField();
+        limparCampos = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         Menu = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         abrir = new javax.swing.JMenuItem();
@@ -81,35 +77,41 @@ public class Conjuntos extends javax.swing.JFrame {
         });
 
         listaElementos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        listaElementos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaElementosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaElementos);
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Lista de Conjuntos Existentes");
 
         listaConjuntos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        listaConjuntos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaConjuntosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(listaConjuntos);
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Lista de Elementos Existentes");
 
-        primeiro.addActionListener(new java.awt.event.ActionListener() {
+        limparCampos.setText("Limpar Campos");
+        limparCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                primeiroActionPerformed(evt);
+                limparCamposActionPerformed(evt);
             }
         });
 
-        segundo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                segundoActionPerformed(evt);
-            }
-        });
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Caminho do Arquivo:");
 
-        teste.setText("Ligação Conjunto-Elemento");
-        teste.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                testeActionPerformed(evt);
-            }
-        });
-
-        jMenu5.setText("File");
+        jMenu5.setText("Arquivo");
 
         abrir.setText("Abrir");
         abrir.addActionListener(new java.awt.event.ActionListener() {
@@ -122,23 +124,53 @@ public class Conjuntos extends javax.swing.JFrame {
         Menu.add(jMenu5);
 
         jMenu1.setText("Operações");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
-        pertence.setText("Pertence");
+        pertence.setText("Pertence(∈) ");
+        pertence.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pertenceActionPerformed(evt);
+            }
+        });
         jMenu1.add(pertence);
 
-        contidoOuIgual.setText("Contido ou Igual");
+        contidoOuIgual.setText("Contido ou Igual (⊆) ");
+        contidoOuIgual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contidoOuIgualActionPerformed(evt);
+            }
+        });
         jMenu1.add(contidoOuIgual);
 
-        contidoPropriamente.setText("Contido Propriamente");
+        contidoPropriamente.setText("Contido Propriamente (⊂) ");
         jMenu1.add(contidoPropriamente);
 
-        uniao.setText("União");
+        uniao.setText("União (∪)  ");
+        uniao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uniaoActionPerformed(evt);
+            }
+        });
         jMenu1.add(uniao);
 
-        intersecao.setText("Interseção");
+        intersecao.setText("Interseção (∩)");
+        intersecao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                intersecaoActionPerformed(evt);
+            }
+        });
         jMenu1.add(intersecao);
 
-        produtoCartesiano.setText("Produto Cartesiano");
+        produtoCartesiano.setText("Produto Cartesiano (×)");
+        produtoCartesiano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                produtoCartesianoActionPerformed(evt);
+            }
+        });
         jMenu1.add(produtoCartesiano);
 
         Menu.add(jMenu1);
@@ -149,39 +181,43 @@ public class Conjuntos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(voltar))
             .addGroup(layout.createSequentialGroup()
                 .addGap(86, 86, 86)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(74, 74, 74))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(enderecoArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(enderecoArquivo, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(limparCampos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(campoUm, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(primeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(segundo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(campoDois, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(teste))
-                        .addGap(6, 6, 6)))
-                .addContainerGap())
+                                .addGap(384, 384, 384)
+                                .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(enderecoArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(enderecoArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -190,14 +226,18 @@ public class Conjuntos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(teste)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(primeiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(segundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addComponent(voltar))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(campoUm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoDois, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(limparCampos)
+                        .addContainerGap(39, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
@@ -221,58 +261,98 @@ public class Conjuntos extends javax.swing.JFrame {
             }
             enderecoArquivo.setText(caminho);
             try {
-
                 ArrayList<String> arquivoLido = ManipulaArquivo.lerArquivo(caminho);
-
-                //<editor-fold defaultstate="collapsed" desc="Elementos">
-                ArrayList<String> elementos = PadraoLeitura.identificaElemento(arquivoLido);
-                modelElementos.removeAllElements();
-                listaElementos.setModel(modelElementos);
-                Iterator<String> elementosInterador = elementos.iterator();
-                while (elementosInterador.hasNext()) {
-                    modelElementos.addElement(elementosInterador.next());
-                }
-                //</editor-fold>
-
-                //<editor-fold defaultstate="collapsed" desc="Conjuntos">
-                ArrayList<String> conjuntos = PadraoLeitura.identificaConjunto(arquivoLido);
-                modelConjuntos.removeAllElements();
-                listaConjuntos.setModel(modelConjuntos);
-                Iterator<String> conjuntosInterador = conjuntos.iterator();
-                while (conjuntosInterador.hasNext()) {
-                    modelConjuntos.addElement(conjuntosInterador.next());
-                }
-                //</editor-fold>
-
+                preencheListaConjuntos(arquivoLido);
+                preencheListaElementos(arquivoLido);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Conjuntos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            JOptionPane.showMessageDialog(null, "Arquivo gravado com sucesso");
+            //JOptionPane.showMessageDialog(null, "Arquivo gravado com sucesso");
         }
     }//GEN-LAST:event_abrirActionPerformed
 
-    private void segundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_segundoActionPerformed
-        //Esse soemnte recebe conjuntos
-        segundo.setText(listaConjuntos.getSelectedValue());
-    }//GEN-LAST:event_segundoActionPerformed
-
-    private void primeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primeiroActionPerformed
-        //Se for ConjuntoElemento Esse recebe o elemento selecionado
-        if (teste.isSelected()) {
-            primeiro.setText(listaElementos.getSelectedValue());
-        } else {
-            primeiro.setText(listaConjuntos.getSelectedValue());
+    private void preencheListaElementos(ArrayList<String> arquivoLido) {
+        ArrayList<String> elementos = PadraoLeitura.identificaElemento(arquivoLido);
+        modelElementos.removeAllElements();
+        listaElementos.setModel(modelElementos);
+        Iterator<String> elementosInterador = elementos.iterator();
+        while (elementosInterador.hasNext()) {
+            modelElementos.addElement(elementosInterador.next());
         }
-    }//GEN-LAST:event_primeiroActionPerformed
 
-    private void testeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testeActionPerformed
-        boolean isElementoToConjunto;
-        if (teste.isSelected()) {
-            isElementoToConjunto = true;
-        } else {
-            isElementoToConjunto = false;
+    }
+
+    private void preencheListaConjuntos(ArrayList<String> arquivoLido) {
+        ArrayList<String> conjuntos = PadraoLeitura.identificaConjunto(arquivoLido);
+        modelConjuntos.removeAllElements();
+        listaConjuntos.setModel(modelConjuntos);
+        Iterator<String> conjuntosInterador = conjuntos.iterator();
+        while (conjuntosInterador.hasNext()) {
+            modelConjuntos.addElement(conjuntosInterador.next());
         }
-    }//GEN-LAST:event_testeActionPerformed
+
+    }
+
+    private void listaConjuntosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaConjuntosMouseClicked
+        if (campoUm.getText().isEmpty()) {
+            campoUm.setText(listaConjuntos.getSelectedValue());
+        } else if (!campoUm.getText().equals(listaConjuntos.getSelectedValue())) {
+            campoDois.setText(listaConjuntos.getSelectedValue());
+        } else {
+            JOptionPane.showMessageDialog(null, "Você não pode selecionar o mesmo conjunto duas vezes!");
+        }
+    }//GEN-LAST:event_listaConjuntosMouseClicked
+
+    private void listaElementosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaElementosMouseClicked
+        campoDois.setText(listaElementos.getSelectedValue());
+    }//GEN-LAST:event_listaElementosMouseClicked
+
+    private void limparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparCamposActionPerformed
+        campoUm.setText("");
+        campoDois.setText("");
+    }//GEN-LAST:event_limparCamposActionPerformed
+
+    private boolean campoVazio() {
+        if (campoUm.getText() == "" || campoDois.getText() == "") {
+            JOptionPane.showMessageDialog(null, "Um ou mais campos estão vazios!");
+            return true;
+        } else {
+            return false;
+        }
+    }
+    private void uniaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uniaoActionPerformed
+        if (!campoVazio()) {
+            Operacoes.operacaoUniao(campoUm.getText(), campoDois.getText());
+        }
+    }//GEN-LAST:event_uniaoActionPerformed
+
+    private void pertenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pertenceActionPerformed
+        if (!campoVazio()) {
+            Operacoes.operacaoPertence(campoUm.getText(), campoDois.getText());
+        }
+    }//GEN-LAST:event_pertenceActionPerformed
+
+    private void contidoOuIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contidoOuIgualActionPerformed
+        if (!campoVazio()) {
+            Operacoes.operacaoContidoIgual(campoUm.getText(), campoDois.getText());
+        }
+    }//GEN-LAST:event_contidoOuIgualActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void intersecaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_intersecaoActionPerformed
+        if (!campoVazio()) {
+            Operacoes.operacaoIntersecao(campoUm.getText(), campoDois.getText());
+        }
+    }//GEN-LAST:event_intersecaoActionPerformed
+
+    private void produtoCartesianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produtoCartesianoActionPerformed
+        if (!campoVazio()) {
+            Operacoes.operacaoProdutoCartesiano(campoUm.getText(), campoDois.getText());
+        }
+    }//GEN-LAST:event_produtoCartesianoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,24 +392,25 @@ public class Conjuntos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar Menu;
     private javax.swing.JMenuItem abrir;
+    private javax.swing.JTextField campoDois;
+    private javax.swing.JTextField campoUm;
     private javax.swing.JMenuItem contidoOuIgual;
     private javax.swing.JMenuItem contidoPropriamente;
     private javax.swing.JTextField enderecoArquivo;
     private javax.swing.JMenuItem intersecao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton limparCampos;
     private javax.swing.JList<String> listaConjuntos;
     private javax.swing.JList<String> listaElementos;
     private javax.swing.JMenuItem pertence;
-    private javax.swing.JTextField primeiro;
     private javax.swing.JMenuItem produtoCartesiano;
-    private javax.swing.JTextField segundo;
-    private javax.swing.JCheckBox teste;
     private javax.swing.JMenuItem uniao;
     private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables

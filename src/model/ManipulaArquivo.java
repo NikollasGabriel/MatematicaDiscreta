@@ -16,11 +16,9 @@ public class ManipulaArquivo {
         Scanner leitor = new Scanner(caminhoBuffer);
         ArrayList<String> arquivo = new ArrayList<String>();
         while (leitor.hasNext()) {
-            //System.out.println(leitor.nextLine());
             arquivo.add(leitor.nextLine());
         }
-        //System.out.println(arquivo.get(arquivo.size()-1));
-        //PadraoLeitura.identificaPadrao(arquivo);
+
         return arquivo;
     }
 
