@@ -34,29 +34,14 @@
                 <Property name="text" type="java.lang.String" value="Pertence"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="naoPertence">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="N&#xe3;o Pertence"/>
-              </Properties>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="contidoOuIgual">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Contido ou Igual"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="naoContidoOuIgual">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="N&#xe3;o Contido ou Igual"/>
-              </Properties>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="contidoPropriamente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Contido Propriamente"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="naoContidoPropriamente">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="N&#xe3;o Contido Propriamente"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="uniao">
@@ -121,15 +106,16 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
+                              <Component id="primeiro" min="-2" pref="89" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="segundo" min="-2" pref="96" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jScrollPane2" min="-2" pref="300" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="300" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="teste" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   </Group>
@@ -153,10 +139,12 @@
                   <Component id="jScrollPane1" min="-2" pref="207" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="207" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="51" max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <Component id="teste" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="primeiro" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="segundo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Component id="voltar" min="-2" max="-2" attributes="0"/>
@@ -229,15 +217,23 @@
         <Property name="text" type="java.lang.String" value="Lista de Elementos Existentes"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="primeiro">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="primeiroActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="segundo">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="segundoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="teste">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
+        <Property name="text" type="java.lang.String" value="Liga&#xe7;&#xe3;o Conjunto-Elemento"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="testeActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

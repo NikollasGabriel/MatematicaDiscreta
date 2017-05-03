@@ -5,8 +5,14 @@
  */
 package view;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
+import static java.nio.file.Files.list;
+import static java.rmi.Naming.list;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,18 +55,16 @@ public class Conjuntos extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         listaConjuntos = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        primeiro = new javax.swing.JTextField();
+        segundo = new javax.swing.JTextField();
+        teste = new javax.swing.JCheckBox();
         Menu = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         abrir = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         pertence = new javax.swing.JMenuItem();
-        naoPertence = new javax.swing.JMenuItem();
         contidoOuIgual = new javax.swing.JMenuItem();
-        naoContidoOuIgual = new javax.swing.JMenuItem();
         contidoPropriamente = new javax.swing.JMenuItem();
-        naoContidoPropriamente = new javax.swing.JMenuItem();
         uniao = new javax.swing.JMenuItem();
         intersecao = new javax.swing.JMenuItem();
         produtoCartesiano = new javax.swing.JMenuItem();
@@ -86,9 +90,24 @@ public class Conjuntos extends javax.swing.JFrame {
 
         jLabel2.setText("Lista de Elementos Existentes");
 
-        jTextField1.setText("jTextField1");
+        primeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                primeiroActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setText("jTextField2");
+        segundo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                segundoActionPerformed(evt);
+            }
+        });
+
+        teste.setText("Ligação Conjunto-Elemento");
+        teste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                testeActionPerformed(evt);
+            }
+        });
 
         jMenu5.setText("File");
 
@@ -107,20 +126,11 @@ public class Conjuntos extends javax.swing.JFrame {
         pertence.setText("Pertence");
         jMenu1.add(pertence);
 
-        naoPertence.setText("Não Pertence");
-        jMenu1.add(naoPertence);
-
         contidoOuIgual.setText("Contido ou Igual");
         jMenu1.add(contidoOuIgual);
 
-        naoContidoOuIgual.setText("Não Contido ou Igual");
-        jMenu1.add(naoContidoOuIgual);
-
         contidoPropriamente.setText("Contido Propriamente");
         jMenu1.add(contidoPropriamente);
-
-        naoContidoPropriamente.setText("Não Contido Propriamente");
-        jMenu1.add(naoContidoPropriamente);
 
         uniao.setText("União");
         jMenu1.add(uniao);
@@ -156,13 +166,14 @@ public class Conjuntos extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(primeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(segundo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(teste))
                         .addGap(6, 6, 6)))
                 .addContainerGap())
         );
@@ -179,10 +190,12 @@ public class Conjuntos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(teste)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(primeiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(segundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addComponent(voltar))
         );
@@ -208,9 +221,9 @@ public class Conjuntos extends javax.swing.JFrame {
             }
             enderecoArquivo.setText(caminho);
             try {
-                
+
                 ArrayList<String> arquivoLido = ManipulaArquivo.lerArquivo(caminho);
-                
+
                 //<editor-fold defaultstate="collapsed" desc="Elementos">
                 ArrayList<String> elementos = PadraoLeitura.identificaElemento(arquivoLido);
                 modelElementos.removeAllElements();
@@ -220,7 +233,7 @@ public class Conjuntos extends javax.swing.JFrame {
                     modelElementos.addElement(elementosInterador.next());
                 }
                 //</editor-fold>
-                
+
                 //<editor-fold defaultstate="collapsed" desc="Conjuntos">
                 ArrayList<String> conjuntos = PadraoLeitura.identificaConjunto(arquivoLido);
                 modelConjuntos.removeAllElements();
@@ -230,13 +243,36 @@ public class Conjuntos extends javax.swing.JFrame {
                     modelConjuntos.addElement(conjuntosInterador.next());
                 }
                 //</editor-fold>
-                
+
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Conjuntos.class.getName()).log(Level.SEVERE, null, ex);
             }
             JOptionPane.showMessageDialog(null, "Arquivo gravado com sucesso");
         }
     }//GEN-LAST:event_abrirActionPerformed
+
+    private void segundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_segundoActionPerformed
+        //Esse soemnte recebe conjuntos
+        segundo.setText(listaConjuntos.getSelectedValue());
+    }//GEN-LAST:event_segundoActionPerformed
+
+    private void primeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primeiroActionPerformed
+        //Se for ConjuntoElemento Esse recebe o elemento selecionado
+        if (teste.isSelected()) {
+            primeiro.setText(listaElementos.getSelectedValue());
+        } else {
+            primeiro.setText(listaConjuntos.getSelectedValue());
+        }
+    }//GEN-LAST:event_primeiroActionPerformed
+
+    private void testeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testeActionPerformed
+        boolean isElementoToConjunto;
+        if (teste.isSelected()) {
+            isElementoToConjunto = true;
+        } else {
+            isElementoToConjunto = false;
+        }
+    }//GEN-LAST:event_testeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,15 +323,13 @@ public class Conjuntos extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JList<String> listaConjuntos;
     private javax.swing.JList<String> listaElementos;
-    private javax.swing.JMenuItem naoContidoOuIgual;
-    private javax.swing.JMenuItem naoContidoPropriamente;
-    private javax.swing.JMenuItem naoPertence;
     private javax.swing.JMenuItem pertence;
+    private javax.swing.JTextField primeiro;
     private javax.swing.JMenuItem produtoCartesiano;
+    private javax.swing.JTextField segundo;
+    private javax.swing.JCheckBox teste;
     private javax.swing.JMenuItem uniao;
     private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
