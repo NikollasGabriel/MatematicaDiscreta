@@ -147,6 +147,11 @@ public class Conjuntos extends javax.swing.JFrame {
         jMenu1.add(contidoOuIgual);
 
         contidoPropriamente.setText("Contido Propriamente (⊂) ");
+        contidoPropriamente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contidoPropriamenteActionPerformed(evt);
+            }
+        });
         jMenu1.add(contidoPropriamente);
 
         uniao.setText("União (∪)  ");
@@ -226,7 +231,6 @@ public class Conjuntos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -261,18 +265,17 @@ public class Conjuntos extends javax.swing.JFrame {
             }
             enderecoArquivo.setText(caminho);
             try {
-                ArrayList<String> arquivoLido = ManipulaArquivo.lerArquivo(caminho);
+                ArrayList<String> arquivoLido = ManipulaArquivo.abrirArquivo(caminho);
                 preencheListaConjuntos(arquivoLido);
                 preencheListaElementos(arquivoLido);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Conjuntos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            //JOptionPane.showMessageDialog(null, "Arquivo gravado com sucesso");
         }
     }//GEN-LAST:event_abrirActionPerformed
 
     private void preencheListaElementos(ArrayList<String> arquivoLido) {
-        ArrayList<String> elementos = PadraoLeitura.identificaElemento(arquivoLido);
+        ArrayList<String> elementos = PadraoLeitura.identificaElementos(arquivoLido);
         modelElementos.removeAllElements();
         listaElementos.setModel(modelElementos);
         Iterator<String> elementosInterador = elementos.iterator();
@@ -283,7 +286,7 @@ public class Conjuntos extends javax.swing.JFrame {
     }
 
     private void preencheListaConjuntos(ArrayList<String> arquivoLido) {
-        ArrayList<String> conjuntos = PadraoLeitura.identificaConjunto(arquivoLido);
+        ArrayList<String> conjuntos = PadraoLeitura.identificaConjuntos(arquivoLido);
         modelConjuntos.removeAllElements();
         listaConjuntos.setModel(modelConjuntos);
         Iterator<String> conjuntosInterador = conjuntos.iterator();
@@ -313,27 +316,30 @@ public class Conjuntos extends javax.swing.JFrame {
     }//GEN-LAST:event_limparCamposActionPerformed
 
     private boolean campoVazio() {
-        if (campoUm.getText() == "" || campoDois.getText() == "") {
+        if (campoUm.getText().equals("") && campoDois.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Um ou mais campos estão vazios!");
-            return true;
-        } else {
             return false;
+        } else if (campoUm.getText().equals("") || campoDois.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Um campo esta vazio!");
+            return false;
+        } else {
+            return true;
         }
     }
     private void uniaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uniaoActionPerformed
-        if (!campoVazio()) {
+        if (campoVazio()) {
             Operacoes.operacaoUniao(campoUm.getText(), campoDois.getText());
         }
     }//GEN-LAST:event_uniaoActionPerformed
 
     private void pertenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pertenceActionPerformed
-        if (!campoVazio()) {
+        if (campoVazio()) {
             Operacoes.operacaoPertence(campoUm.getText(), campoDois.getText());
         }
     }//GEN-LAST:event_pertenceActionPerformed
 
     private void contidoOuIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contidoOuIgualActionPerformed
-        if (!campoVazio()) {
+        if (campoVazio()) {
             Operacoes.operacaoContidoIgual(campoUm.getText(), campoDois.getText());
         }
     }//GEN-LAST:event_contidoOuIgualActionPerformed
@@ -343,16 +349,22 @@ public class Conjuntos extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void intersecaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_intersecaoActionPerformed
-        if (!campoVazio()) {
+        if (campoVazio()) {
             Operacoes.operacaoIntersecao(campoUm.getText(), campoDois.getText());
         }
     }//GEN-LAST:event_intersecaoActionPerformed
 
     private void produtoCartesianoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produtoCartesianoActionPerformed
-        if (!campoVazio()) {
+        if (campoVazio()) {
             Operacoes.operacaoProdutoCartesiano(campoUm.getText(), campoDois.getText());
         }
     }//GEN-LAST:event_produtoCartesianoActionPerformed
+
+    private void contidoPropriamenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contidoPropriamenteActionPerformed
+        if (campoVazio()) {
+            Operacoes.operacaoContidoPropriamente(campoUm.getText(), campoDois.getText());
+        }
+    }//GEN-LAST:event_contidoPropriamenteActionPerformed
 
     /**
      * @param args the command line arguments
