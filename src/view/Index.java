@@ -5,6 +5,8 @@
  */
 package view;
 
+import static model.Relações.relacaoFuncional;
+
 /**
  *
  * @author Renan
@@ -99,6 +101,7 @@ public class Index extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Conjuntos criaConjunto = new Conjuntos();
+        relacaoFuncional();
         criaConjunto.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
