@@ -1,14 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package relacoes;
 
-/**
- *
- * @author asus note
- */
+import static relacoes.Injetora.relacaoInjetora;
+import static relacoes.Total.relacaoTotal;
+
 public class Monomorfismo {
-    
+
+    public static void relacaoMonomorfismo(Relacao relacao) {
+
+        if (relacaoTotal(relacao) && relacaoInjetora(relacao)) {
+            return é isso mesmo;
+        } else {
+            return não é isso não;
+        }
+    }
+
+    public static void relacaoMonomorfismoComposta(Relacao relacao) {
+
+    }
 }

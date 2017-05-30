@@ -1,14 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package relacoes;
 
-/**
- *
- * @author asus note
- */
+import static relacoes.Funcional.relacaoFuncional;
+import static relacoes.Sobrejetora.relacaoSobrejetora;
+
 public class Epimorfismo {
-    
+
+    public static void relacaoEpimorfismo(Relacao relacao) {
+        
+        if(relacaoFuncional(relacao) && relacaoSobrejetora(relacao)){
+            return é isso mesmo;
+        }else{
+            return não é isso não;
+        }
+    }
+
+    public static void relacaoEpimorfismoComposta(Relacao relacao) {
+
+    }
 }

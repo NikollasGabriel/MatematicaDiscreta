@@ -5,7 +5,8 @@
  */
 package view;
 
-import static model.Relações.relacaoFuncional;
+import static relacoes.Sobrejetora.relacaoSobrejetora;
+import static relacoes.Total.relacaoTotal;
 
 /**
  *
@@ -101,7 +102,7 @@ public class Index extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Conjuntos criaConjunto = new Conjuntos();
-        relacaoFuncional();
+        relacaoSobrejetora();
         criaConjunto.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
