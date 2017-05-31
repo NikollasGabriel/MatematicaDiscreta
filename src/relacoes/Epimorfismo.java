@@ -10,7 +10,7 @@ public class Epimorfismo {
         return relacaoFuncional(relacao) && relacaoSobrejetora(relacao);
     }
 
-    public static void relacaoEpimorfismoComposta(Relacao relacao) {
+    public static boolean relacaoEpimorfismoComposta(Relacao relacao) {
         return relacaoFuncional(relacao) && relacaoSobrejetora(relacao);
     }
 }

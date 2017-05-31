@@ -1,17 +1,19 @@
 package relacoes;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.PadraoLeitura;
 
 public class Funcional extends Relacao {
 
-    public static void relacaoFuncional(Relacao relacao) {
+    public static boolean relacaoFuncional(Relacao relacao) {
         //Portanto, para R: A -> B funcional, cada elemento de A está relacionado com, no máximo, um elemento de B;
 
-        boolean relacaoExistente;
+        boolean relacaoExistente = true;
 
-        StringBuilder paresRelacao = new StringBuilder();
-        paresRelacao.append("(< , R: A -> B):={");
+        StringBuilder paresRelacao = new StringBuilder();        
+        paresRelacao.append("Pares da Relação (").append(relacao.getRelacao()).append(" ,R: ")
+                .append(relacao.getConjuntoA()).append(" -> ").append(relacao.getConjuntoB()).append("):={");
 
         StringBuilder dominioDefinicao = new StringBuilder();
         dominioDefinicao.append("Domínio de Definição:={");
@@ -21,7 +23,6 @@ public class Funcional extends Relacao {
 
         ArrayList<String> conjuntoA = PadraoLeitura.decompoeElementos(relacao.getConjuntoA());
         ArrayList<String> conjuntoB = PadraoLeitura.decompoeElementos(relacao.getConjuntoB());
-        ArrayList<String> conjuntoC = PadraoLeitura.decompoeElementos(relacao.getConjuntoC());
 
         if (relacao.getRelacao().equals("<")) {
             relacaoExistente = false;
@@ -29,37 +30,21 @@ public class Funcional extends Relacao {
             OUTERMOST:
             for (String elementoA : conjuntoA) {
                 for (String elementoB : conjuntoB) {
-                    for (String elementoC : conjuntoC) {
-                        if (Integer.parseInt(elementoA) < Integer.parseInt(elementoB)) {
-                            if (!(dominioDefinicao.indexOf(elementoA) >= 0) && !(dominioValores.indexOf(elementoB) >= 0)) {
-                                //Montagem das strings
-                                dominioDefinicao.append(elementoA).append(",");
-                                dominioValores.append(elementoB).append(",");
-                                paresRelacao.append("<").append(elementoA).append(",").append(elementoB).append(">,");
-                                //Se atende a condição, a relação existe até o momento
-                                relacaoExistente = true;
-                            }
-                        } else {
-                            //Se não obedecer a relação, então a relação em si é falsa 
-                            relacaoExistente = false;
-                            break OUTERMOST;
+                    if (Integer.parseInt(elementoA) < Integer.parseInt(elementoB)) {
+                        if (!(dominioDefinicao.indexOf(elementoA) >= 0) && !(dominioValores.indexOf(elementoB) >= 0)) {
+                            //Montagem das strings
+                            dominioDefinicao.append(elementoA).append(",");
+                            dominioValores.append(elementoB).append(",");
+                            paresRelacao.append("<").append(elementoA).append(",").append(elementoB).append(">,");
+                            //Se atende a condição, a relação existe até o momento
+                            relacaoExistente = true;
                         }
+                    } else {
+                        //Se não obedecer a relação, então a relação em si é falsa 
+                        relacaoExistente = false;
+                        break OUTERMOST;
                     }
                 }
-            }
-
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função é Funcional");
-
-            } else {
-                System.out.println("(< , R: A -> B) não é uma relação Funcional");
             }
 
         } else if (relacao.getRelacao().equals(">")) {
@@ -86,19 +71,6 @@ public class Funcional extends Relacao {
                 }
             }
 
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função é Funcional");
-            } else {
-                System.out.println("(> , R: A -> B) não é uma relação Funcional");
-            }
-
         } else if (relacao.getRelacao().equals("=")) {
             relacaoExistente = false;
 
@@ -121,19 +93,6 @@ public class Funcional extends Relacao {
                         break OUTERMOST;
                     }
                 }
-            }
-
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função é Funcional");
-            } else {
-                System.out.println("(= , R: A -> B) não é uma relação Funcional");
             }
 
         } else if (relacao.getRelacao().equals("quadrado")) {
@@ -160,19 +119,6 @@ public class Funcional extends Relacao {
                 }
             }
 
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função é Funcional");
-            } else {
-                System.out.println("(x²=y , R: A -> B) não é uma relação Funcional");
-            }
-
         } else if (relacao.getRelacao().equals("raizQuadrada")) {
             relacaoExistente = false;
 
@@ -197,31 +143,39 @@ public class Funcional extends Relacao {
                 }
             }
 
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função é Funcional");
-            } else {
-                System.out.println("(√x=y, R: A -> B) não é uma relação Funcional");
-            }
         }
+
+        if (relacaoExistente) {
+            dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
+            dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
+            paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
+
+            JOptionPane.showMessageDialog(null, dominioDefinicao.toString() + "\n"
+                    + dominioValores.toString() + "\n"
+                    + paresRelacao.toString() + "\n"
+                    + relacao.getRelacao() + " :"
+                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoA()) + " -> "
+                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoB()) + " é uma relação Funcional");
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, relacao.getRelacao() + " :"
+                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoA()) + " -> "
+                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoB()) + " não é uma relação Funcional");
+        }
+
+        return relacaoExistente;
     }
 
-    public static void relacaoFuncionalComposta(Relacao relacao) {
+    public static boolean relacaoFuncionalComposta(Relacao relacao) {
         //Portanto, para R: A -> B funcional, cada elemento de A está relacionado com, no máximo, um elemento de B;
         //Portanto, para R: B -> C funcional, cada elemento de B está relacionado com, no máximo, um elemento de C;
-        boolean relacaoExistente;
+
+        boolean relacaoExistente = false;
 
         StringBuilder paresRelacao = new StringBuilder();
-        paresRelacao.append("(< , R: A -> B):={");
-
-        StringBuilder paresRelacao2 = new StringBuilder();
-        paresRelacao2.append("(< , R: B -> C):={");
+        paresRelacao.append("Pares da Relação (").append(relacao.getRelacao()).append(" ,R;S ")
+                .append(relacao.getConjuntoA()).append(" -> ").append(relacao.getConjuntoC()).append("):={");
 
         StringBuilder dominioDefinicao = new StringBuilder();
         dominioDefinicao.append("Domínio de Definição:={");
@@ -245,20 +199,12 @@ public class Funcional extends Relacao {
                                 && (Integer.parseInt(elementoB) < Integer.parseInt(elementoC))
                                 && (Integer.parseInt(elementoA) < Integer.parseInt(elementoC))) {
 
-                            if (!(dominioDefinicao.indexOf(elementoA) >= 0) && !(dominioValores.indexOf(elementoB) >= 0) && !(dominioValores.indexOf(elementoC) >= 0)) {
-                                //Montagem das strings
-                                dominioDefinicao.append(elementoA).append(",");
-                                dominioValores.append(elementoB).append(",");
-                                paresRelacao.append("<").append(elementoA).append(",").append(elementoB).append(">,");
-
-                                dominioDefinicao.append(elementoB).append(",");
-                                dominioValores.append(elementoC).append(",");
-                                paresRelacao.append("<").append(elementoB).append(",").append(elementoC).append(">,");
+                            if (!(dominioDefinicao.indexOf(elementoA) >= 0) && !(dominioValores.indexOf(elementoC) >= 0) && !(dominioValores.indexOf(elementoC) >= 0)) {
 
                                 dominioDefinicao.append(elementoA).append(",");
                                 dominioValores.append(elementoC).append(",");
                                 paresRelacao.append("<").append(elementoA).append(",").append(elementoC).append(">,");
-                                //Se atende a condição, a relação existe até o momento
+
                                 relacaoExistente = true;
 
                             } else {
@@ -269,20 +215,6 @@ public class Funcional extends Relacao {
                         }
                     }
                 }
-            }
-
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função é Funcional");
-
-            } else {
-                System.out.println("(< , R: A -> B -> C) não é uma relação Funcional");
             }
 
         } else if (relacao.getRelacao()
@@ -297,21 +229,12 @@ public class Funcional extends Relacao {
                                 && (Integer.parseInt(elementoB) > Integer.parseInt(elementoC))
                                 && (Integer.parseInt(elementoA) > Integer.parseInt(elementoC))) {
 
-                            if (!(dominioDefinicao.indexOf(elementoA) >= 0) && !(dominioValores.indexOf(elementoB) >= 0) && !(dominioValores.indexOf(elementoC) >= 0)) {
-
-                                //Montagem das strings
-                                dominioDefinicao.append(elementoA).append(",");
-                                dominioValores.append(elementoB).append(",");
-                                paresRelacao.append("<").append(elementoA).append(",").append(elementoB).append(">,");
-
-                                dominioDefinicao.append(elementoB).append(",");
-                                dominioValores.append(elementoC).append(",");
-                                paresRelacao.append("<").append(elementoB).append(",").append(elementoC).append(">,");
+                            if (!(dominioDefinicao.indexOf(elementoA) >= 0) && !(dominioValores.indexOf(elementoC) >= 0) && !(dominioValores.indexOf(elementoC) >= 0)) {
 
                                 dominioDefinicao.append(elementoA).append(",");
                                 dominioValores.append(elementoC).append(",");
                                 paresRelacao.append("<").append(elementoA).append(",").append(elementoC).append(">,");
-                                //Se atende a condição, a relação existe até o momento
+
                                 relacaoExistente = true;
                             }
                         } else {
@@ -321,19 +244,6 @@ public class Funcional extends Relacao {
                         }
                     }
                 }
-            }
-
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função é Funcional");
-            } else {
-                System.out.println("(> , R: A -> B -> C) não é uma relação Funcional");
             }
 
         } else if (relacao.getRelacao()
@@ -348,20 +258,12 @@ public class Funcional extends Relacao {
                                 && (Integer.parseInt(elementoB) == Integer.parseInt(elementoC))
                                 && (Integer.parseInt(elementoA) == Integer.parseInt(elementoC))) {
 
-                            if (!(dominioDefinicao.indexOf(elementoA) >= 0) && !(dominioValores.indexOf(elementoB) >= 0) && !(dominioValores.indexOf(elementoC) >= 0)) {
-                                //Montagem das strings
-                                dominioDefinicao.append(elementoA).append(",");
-                                dominioValores.append(elementoB).append(",");
-                                paresRelacao.append("<").append(elementoA).append(",").append(elementoB).append(">,");
-
-                                dominioDefinicao.append(elementoB).append(",");
-                                dominioValores.append(elementoC).append(",");
-                                paresRelacao.append("<").append(elementoB).append(",").append(elementoC).append(">,");
+                            if (!(dominioDefinicao.indexOf(elementoA) >= 0) && !(dominioValores.indexOf(elementoC) >= 0) && !(dominioValores.indexOf(elementoC) >= 0)) {
 
                                 dominioDefinicao.append(elementoA).append(",");
                                 dominioValores.append(elementoC).append(",");
                                 paresRelacao.append("<").append(elementoA).append(",").append(elementoC).append(">,");
-                                //Se atende a condição, a relação existe até o momento
+
                                 relacaoExistente = true;
                             }
                         } else {
@@ -371,19 +273,6 @@ public class Funcional extends Relacao {
                         }
                     }
                 }
-            }
-
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função é Funcional");
-            } else {
-                System.out.println("(= , R: A -> B ->) não é uma relação Funcional");
             }
 
         } else if (relacao.getRelacao()
@@ -399,19 +288,11 @@ public class Funcional extends Relacao {
                                 && ((Integer.parseInt(elementoB) * Integer.parseInt(elementoA)) == Integer.parseInt(elementoC))
                                 && ((Integer.parseInt(elementoA) * Integer.parseInt(elementoA)) == Integer.parseInt(elementoC))) {
                             if (!(dominioDefinicao.indexOf(elementoA) >= 0) && !(dominioValores.indexOf(elementoB) >= 0) && !(dominioValores.indexOf(elementoC) >= 0)) {
-                                //Montagem das strings
-                                dominioDefinicao.append(elementoA).append(",");
-                                dominioValores.append(elementoB).append(",");
-                                paresRelacao.append("<").append(elementoA).append(",").append(elementoB).append(">,");
-
-                                dominioDefinicao.append(elementoB).append(",");
-                                dominioValores.append(elementoC).append(",");
-                                paresRelacao.append("<").append(elementoB).append(",").append(elementoC).append(">,");
 
                                 dominioDefinicao.append(elementoA).append(",");
                                 dominioValores.append(elementoC).append(",");
                                 paresRelacao.append("<").append(elementoA).append(",").append(elementoC).append(">,");
-                                //Se atende a condição, a relação existe até o momento
+
                                 relacaoExistente = true;
                             } else {
                                 //Se não obedecer a relação, então a relação em si é falsa 
@@ -423,19 +304,6 @@ public class Funcional extends Relacao {
                 }
             }
 
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função é Funcional");
-            } else {
-                System.out.println("(x²=y , R: A -> B -> C) não é uma relação Funcional");
-            }
-
         } else if (relacao.getRelacao()
                 .equals("raizQuadrada")) {
             relacaoExistente = false;
@@ -444,45 +312,46 @@ public class Funcional extends Relacao {
             for (String elementoA : conjuntoA) {
                 for (String elementoB : conjuntoB) {
                     for (String elementoC : conjuntoC) {
-                    if ((Math.sqrt(Integer.parseInt(elementoA)) == Integer.parseInt(elementoB)) 
-                            &&(Math.sqrt(Integer.parseInt(elementoB)) == Integer.parseInt(elementoC))
-                            &&(Math.sqrt(Integer.parseInt(elementoA)) == Integer.parseInt(elementoC))){
-                        if (!(dominioDefinicao.indexOf(elementoA) >= 0) && !(dominioValores.indexOf(elementoB) >= 0)) {
-                            //Montagem das strings
-                                dominioDefinicao.append(elementoA).append(",");
-                                dominioValores.append(elementoB).append(",");
-                                paresRelacao.append("<").append(elementoA).append(",").append(elementoB).append(">,");
+                        if ((Math.sqrt(Integer.parseInt(elementoA)) == Integer.parseInt(elementoB))
+                                && (Math.sqrt(Integer.parseInt(elementoB)) == Integer.parseInt(elementoC))
+                                && (Math.sqrt(Integer.parseInt(elementoA)) == Integer.parseInt(elementoC))) {
 
-                                dominioDefinicao.append(elementoB).append(",");
-                                dominioValores.append(elementoC).append(",");
-                                paresRelacao.append("<").append(elementoB).append(",").append(elementoC).append(">,");
+                            if (!(dominioDefinicao.indexOf(elementoA) >= 0) && !(dominioValores.indexOf(elementoC) >= 0)) {
 
                                 dominioDefinicao.append(elementoA).append(",");
                                 dominioValores.append(elementoC).append(",");
                                 paresRelacao.append("<").append(elementoA).append(",").append(elementoC).append(">,");
-                                //Se atende a condição, a relação existe até o momento
+
                                 relacaoExistente = true;
+                            }
+                        } else {
+                            relacaoExistente = false;
+                            break OUTERMOST;
                         }
-                    } else {
-                        //Se não obedecer a relação, então a relação em si é falsa 
-                        relacaoExistente = false;
-                        break OUTERMOST;
                     }
-                }}
-            }
-
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função é Funcional");
-            } else {
-                System.out.println("(√x=y, R: A -> B -> C) não é uma relação Funcional");
+                }
             }
         }
+
+        if (relacaoExistente) {
+            dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
+            dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
+            paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
+
+            JOptionPane.showMessageDialog(null, dominioDefinicao.toString() + "\n"
+                    + dominioValores.toString() + "\n"
+                    + paresRelacao.toString() + "\n"
+                    + relacao.getRelacao() + " :"
+                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoA()) + " -> "
+                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoC()) + " é uma composição de relação Funcional");
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, relacao.getRelacao() + " :"
+                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoA()) + " -> "
+                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoC()) + " não é uma composição de relação Funcional");
+        }
+
+        return relacaoExistente;
     }
 }

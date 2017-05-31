@@ -1,32 +1,30 @@
 package relacoes;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.PadraoLeitura;
 
 public class Sobrejetora extends Relacao {
 
-    public static void relacaoSobrejetora(Relacao relacao) {
+    public static boolean relacaoSobrejetora(Relacao relacao) {
         //Portanto, para R: A -> B sobrejetora conjunto imagem é B
 
-        boolean relacaoExistente = true;
+        boolean relacaoExistente = false;
 
-        //String C = "C={8,5,9,75,2,1}";
-        //String Q = "Q={99,98,100}";
-        //String relacao = "<";
+        StringBuilder paresRelacao = new StringBuilder();        
+        paresRelacao.append("Pares da Relação (").append(relacao.getRelacao()).append(" ,R: ")
+                .append(relacao.getConjuntoB()).append(" -> ").append(relacao.getConjuntoA()).append("):={");
+
+        StringBuilder dominioDefinicao = new StringBuilder();
+        dominioDefinicao.append("Domínio de Definição:={");
+
+        StringBuilder dominioValores = new StringBuilder();
+        dominioValores.append("Domínio de Valores:={");
+
+        ArrayList<String> conjuntoA = PadraoLeitura.decompoeElementos(relacao.getConjuntoA());
+        ArrayList<String> conjuntoB = PadraoLeitura.decompoeElementos(relacao.getConjuntoB());
 
         if (relacao.getRelacao().equals("<")) {
-
-            StringBuilder paresRelacao = new StringBuilder();
-            paresRelacao.append("Pares da Relação ").append(relacao.getRelacao()).append(":{");
-
-            StringBuilder dominioDefinicao = new StringBuilder();
-            dominioDefinicao.append("Domínio de Definição:{");
-
-            StringBuilder dominioValores = new StringBuilder();
-            dominioValores.append("Domínio de Valores:{");
-
-            ArrayList<String> conjuntoA = PadraoLeitura.decompoeElementos(relacao.getConjuntoA());
-            ArrayList<String> conjuntoB = PadraoLeitura.decompoeElementos(relacao.getConjuntoB());
 
             for (String elementoA : conjuntoA) {//Para cada elemento de A
                 for (String elementoB : conjuntoB) {//Para cada elemento de B
@@ -56,33 +54,7 @@ public class Sobrejetora extends Relacao {
                 }
             }
 
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função < : A -> B é Total");
-
-            } else {
-                System.out.println("< : A -> B não é uma relação Total");
-            }
-
         } else if (relacao.getRelacao().equals(">")) {
-
-            StringBuilder paresRelacao = new StringBuilder();
-            paresRelacao.append("Pares da Relação ").append(relacao.getRelacao()).append(":{");
-
-            StringBuilder dominioDefinicao = new StringBuilder();
-            dominioDefinicao.append("Domínio de Definição:{");
-
-            StringBuilder dominioValores = new StringBuilder();
-            dominioValores.append("Domínio de Valores:{");
-
-            ArrayList<String> conjuntoA = PadraoLeitura.decompoeElementos(relacao.getConjuntoA());
-            ArrayList<String> conjuntoB = PadraoLeitura.decompoeElementos(relacao.getConjuntoB());
 
             for (String elementoA : conjuntoA) {//Para cada elemento de A
                 for (String elementoB : conjuntoB) {//Para cada elemento de B
@@ -112,33 +84,7 @@ public class Sobrejetora extends Relacao {
                 }
             }
 
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função < : A -> B é Total");
-
-            } else {
-                System.out.println("< : A -> B não é uma relação Total");
-            }
-
         } else if (relacao.getRelacao().equals("=")) {
-
-            StringBuilder paresRelacao = new StringBuilder();
-            paresRelacao.append("Pares da Relação ").append(relacao.getRelacao()).append(":{");
-
-            StringBuilder dominioDefinicao = new StringBuilder();
-            dominioDefinicao.append("Domínio de Definição:{");
-
-            StringBuilder dominioValores = new StringBuilder();
-            dominioValores.append("Domínio de Valores:{");
-
-            ArrayList<String> conjuntoA = PadraoLeitura.decompoeElementos(relacao.getConjuntoA());
-            ArrayList<String> conjuntoB = PadraoLeitura.decompoeElementos(relacao.getConjuntoB());
 
             for (String elementoA : conjuntoA) {//Para cada elemento de A
                 for (String elementoB : conjuntoB) {//Para cada elemento de B
@@ -168,33 +114,7 @@ public class Sobrejetora extends Relacao {
                 }
             }
 
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função < : A -> B é Total");
-
-            } else {
-                System.out.println("< : A -> B não é uma relação Total");
-            }
-
         } else if (relacao.getRelacao().equals("quadrado")) {
-
-            StringBuilder paresRelacao = new StringBuilder();
-            paresRelacao.append("Pares da Relação ").append(relacao.getRelacao()).append(":{");
-
-            StringBuilder dominioDefinicao = new StringBuilder();
-            dominioDefinicao.append("Domínio de Definição:{");
-
-            StringBuilder dominioValores = new StringBuilder();
-            dominioValores.append("Domínio de Valores:{");
-
-            ArrayList<String> conjuntoA = PadraoLeitura.decompoeElementos(relacao.getConjuntoA());
-            ArrayList<String> conjuntoB = PadraoLeitura.decompoeElementos(relacao.getConjuntoB());
 
             for (String elementoA : conjuntoA) {//Para cada elemento de A
                 for (String elementoB : conjuntoB) {//Para cada elemento de B
@@ -224,33 +144,7 @@ public class Sobrejetora extends Relacao {
                 }
             }
 
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função < : A -> B é Total");
-
-            } else {
-                System.out.println("< : A -> B não é uma relação Total");
-            }
-
         } else if (relacao.getRelacao().equals("raizQuadrada")) {
-
-            StringBuilder paresRelacao = new StringBuilder();
-            paresRelacao.append("Pares da Relação ").append(relacao.getRelacao()).append(":{");
-
-            StringBuilder dominioDefinicao = new StringBuilder();
-            dominioDefinicao.append("Domínio de Definição:{");
-
-            StringBuilder dominioValores = new StringBuilder();
-            dominioValores.append("Domínio de Valores:{");
-
-            ArrayList<String> conjuntoA = PadraoLeitura.decompoeElementos(relacao.getConjuntoA());
-            ArrayList<String> conjuntoB = PadraoLeitura.decompoeElementos(relacao.getConjuntoB());
 
             for (String elementoA : conjuntoA) {//Para cada elemento de A
                 for (String elementoB : conjuntoB) {//Para cada elemento de B
@@ -280,20 +174,30 @@ public class Sobrejetora extends Relacao {
                 }
             }
 
-            if (relacaoExistente) {
-                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-                System.out.println(dominioDefinicao.toString());
-                System.out.println(dominioValores.toString());
-                System.out.println(paresRelacao.toString());
-                System.out.println("A função < : A -> B é Sobrejetora");
-
-            } else {
-                System.out.println("< : A -> B não é uma relação Total");
-            }
         }
+
+        if (relacaoExistente) {
+            dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
+            dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
+            paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
+
+            JOptionPane.showMessageDialog(null, dominioDefinicao.toString() + "\n"
+                    + dominioValores.toString() + "\n"
+                    + paresRelacao.toString() + "\n"
+                    + relacao.getRelacao() + " :"
+                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoB()) + " -> "
+                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoA()) + " é uma relação Sobrejetora");
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, relacao.getRelacao() + " :"
+                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoB()) + " -> "
+                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoA()) + " não é uma relação Sobrejetora");
+        }
+
+
+        return relacaoExistente;
+
     }
 
     public static void relacaoSobrejetoraComposta(Relacao relacao) {

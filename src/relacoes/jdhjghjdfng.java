@@ -1,25 +1,26 @@
 package relacoes;
 
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import model.PadraoLeitura;
 
-public class Total extends Relacao {
+public class jdhjghjdfng extends Relacao {
 
-    public static boolean relacaoTotal(Relacao relacao) {
+    public static void relacaoTotal(Relacao relacao) {
         //Portanto, para R: A -> B total, domínio de definição é A
 
-        boolean relacaoExistente = false;
+        boolean relacaoExistente = true;
+        //String C = "C={8,5,9,75,2,1}";
+        //String Q = "Q={1,2,3}";
+        //String relacao = "<";
 
-        StringBuilder paresRelacao = new StringBuilder();        
-        paresRelacao.append("Pares da Relação (").append(relacao.getRelacao()).append(" ,R: ")
-                .append(relacao.getConjuntoA()).append(" -> ").append(relacao.getConjuntoB()).append("):={");
+        StringBuilder paresRelacao = new StringBuilder();
+        paresRelacao.append("Pares da Relação ").append(relacao.getRelacao()).append(":{");
 
         StringBuilder dominioDefinicao = new StringBuilder();
-        dominioDefinicao.append("Domínio de Definição:={");
+        dominioDefinicao.append("Domínio de Definição:{");
 
         StringBuilder dominioValores = new StringBuilder();
-        dominioValores.append("Domínio de Valores:={");
+        dominioValores.append("Domínio de Valores:{");
 
         ArrayList<String> conjuntoA = PadraoLeitura.decompoeElementos(relacao.getConjuntoA());
         ArrayList<String> conjuntoB = PadraoLeitura.decompoeElementos(relacao.getConjuntoB());
@@ -53,7 +54,23 @@ public class Total extends Relacao {
                     relacaoExistente = false;
                 }
             }
+
+            if (relacaoExistente) {
+                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
+                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
+                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
+
+                System.out.println(dominioDefinicao.toString());
+                System.out.println(dominioValores.toString());
+                System.out.println(paresRelacao.toString());
+                System.out.println("A função < : A -> B é Total");
+
+            } else {
+                System.out.println("< : A -> B não é uma relação Total");
+            }
+
         } else if (relacao.getRelacao().equals(">")) {
+
 
             for (String elementoA : conjuntoA) {//Para cada elemento de A
                 for (String elementoB : conjuntoB) {//Para cada elemento de B
@@ -83,7 +100,23 @@ public class Total extends Relacao {
                 }
             }
 
+            if (relacaoExistente) {
+                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
+                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
+                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
+
+                System.out.println(dominioDefinicao.toString());
+                System.out.println(dominioValores.toString());
+                System.out.println(paresRelacao.toString());
+                System.out.println("A função < : A -> B é Total");
+
+            } else {
+                System.out.println("< : A -> B não é uma relação Total");
+            }
+
         } else if (relacao.getRelacao().equals("=")) {
+
+
 
             for (String elementoA : conjuntoA) {//Para cada elemento de A
                 for (String elementoB : conjuntoB) {//Para cada elemento de B
@@ -113,7 +146,23 @@ public class Total extends Relacao {
                 }
             }
 
+            if (relacaoExistente) {
+                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
+                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
+                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
+
+                System.out.println(dominioDefinicao.toString());
+                System.out.println(dominioValores.toString());
+                System.out.println(paresRelacao.toString());
+                System.out.println("A função < : A -> B é Total");
+
+            } else {
+                System.out.println("< : A -> B não é uma relação Total");
+            }
+
         } else if (relacao.getRelacao().equals("quadrado")) {
+
+
 
             for (String elementoA : conjuntoA) {//Para cada elemento de A
                 for (String elementoB : conjuntoB) {//Para cada elemento de B
@@ -143,7 +192,22 @@ public class Total extends Relacao {
                 }
             }
 
+            if (relacaoExistente) {
+                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
+                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
+                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
+
+                System.out.println(dominioDefinicao.toString());
+                System.out.println(dominioValores.toString());
+                System.out.println(paresRelacao.toString());
+                System.out.println("A função < : A -> B é Total");
+
+            } else {
+                System.out.println("< : A -> B não é uma relação Total");
+            }
+
         } else if (relacao.getRelacao().equals("raizQuadrada")) {
+
 
             for (String elementoA : conjuntoA) {//Para cada elemento de A
                 for (String elementoB : conjuntoB) {//Para cada elemento de B
@@ -172,32 +236,21 @@ public class Total extends Relacao {
                     relacaoExistente = false;
                 }
             }
+
+            if (relacaoExistente) {
+                dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
+                dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
+                paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
+
+                System.out.println(dominioDefinicao.toString());
+                System.out.println(dominioValores.toString());
+                System.out.println(paresRelacao.toString());
+                System.out.println("A função < : A -> B é Total");
+
+            } else {
+                System.out.println("< : A -> B não é uma relação Total");
+            }
         }
-
-        if (relacaoExistente) {
-            dominioDefinicao.deleteCharAt(dominioDefinicao.length() - 1).append("}");
-            dominioValores.deleteCharAt(dominioValores.length() - 1).append("}");
-            paresRelacao.deleteCharAt(paresRelacao.length() - 1).append("}");
-
-            JOptionPane.showMessageDialog(null, dominioDefinicao.toString() + "\n"
-                    + dominioValores.toString() + "\n"
-                    + paresRelacao.toString() + "\n"
-                    + relacao.getRelacao() + " :"
-                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoA()) + " -> "
-                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoB()) + " é uma relação Total");
-
-        } else {
-
-            JOptionPane.showMessageDialog(null, relacao.getRelacao() + " :"
-                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoA()) + " -> "
-                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoB()) + " não é uma relação Total");
-        }
-
-
-        return relacaoExistente;
     }
 
-    public static void relacaoTotalComposta(Relacao relacao) {
-
-    }
 }

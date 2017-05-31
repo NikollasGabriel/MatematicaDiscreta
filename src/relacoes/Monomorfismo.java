@@ -10,7 +10,7 @@ public class Monomorfismo {
         return relacaoTotal(relacao) && relacaoInjetora(relacao);
     }
 
-    public static void relacaoMonomorfismoComposta(Relacao relacao) {
+    public static boolean relacaoMonomorfismoComposta(Relacao relacao) {
         return relacaoTotal(relacao) && relacaoInjetora(relacao);
     }
 }
