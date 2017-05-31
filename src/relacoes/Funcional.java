@@ -11,7 +11,7 @@ public class Funcional extends Relacao {
 
         boolean relacaoExistente = true;
 
-        StringBuilder paresRelacao = new StringBuilder();        
+        StringBuilder paresRelacao = new StringBuilder();
         paresRelacao.append("Pares da Relação (").append(relacao.getRelacao()).append(" ,R: ")
                 .append(relacao.getConjuntoA()).append(" -> ").append(relacao.getConjuntoB()).append("):={");
 
