@@ -5,12 +5,12 @@ import static relacoes.Monomorfismo.relacaoMonomorfismo;
 
 public class Isomorfismo {
 
-    public static void relacaoIsomorfismo(Relacao relacao) {
+    public static String relacaoIsomorfismo(Relacao relacao) {
 
         if (relacaoMonomorfismo(relacao) && relacaoEpimorfismo(relacao)) {
-            return é isso mesmo;
+            return "É Monomorfismo";
         } else {
-            return não é isso não;
+            return "Não é Monomorfismo";
         }
 
     }
