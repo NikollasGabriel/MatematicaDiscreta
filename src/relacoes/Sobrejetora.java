@@ -440,13 +440,13 @@ public class Sobrejetora extends Relacao {
                     + paresRelacao.toString() + "\n"
                     + relacao.getRelacao() + " :"
                     + PadraoLeitura.nomeConjunto(relacao.getConjuntoC()) + " -> "
-                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoA()) + " é uma composição de relação Total");
+                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoA()) + " é uma composição de relação Sobrejetora");
 
         } else {
 
             JOptionPane.showMessageDialog(null, relacao.getRelacao() + " :"
                     + PadraoLeitura.nomeConjunto(relacao.getConjuntoC()) + " -> "
-                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoA()) + " não é uma composição de relação Total");
+                    + PadraoLeitura.nomeConjunto(relacao.getConjuntoA()) + " não é uma composição de relação Sobrejetora");
         }
 
         return relacaoExistente;

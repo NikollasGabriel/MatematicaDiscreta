@@ -129,7 +129,6 @@ public class Injetora extends Relacao {
                     + PadraoLeitura.nomeConjunto(relacao.getConjuntoB()) + " -> "
                     + PadraoLeitura.nomeConjunto(relacao.getConjuntoA()) + " é uma relação Injetora");
 
-            System.out.println(paresRelacao.toString());
 
         } else {
 
@@ -137,7 +136,6 @@ public class Injetora extends Relacao {
                     + PadraoLeitura.nomeConjunto(relacao.getConjuntoB()) + " -> "
                     + PadraoLeitura.nomeConjunto(relacao.getConjuntoA()) + " não é uma relação Injetora");
 
-            System.out.println(paresRelacao.toString());
         }
 
         return relacaoExistente;

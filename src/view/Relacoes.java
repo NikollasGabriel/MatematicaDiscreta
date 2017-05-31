@@ -40,6 +40,7 @@ public class Relacoes extends javax.swing.JFrame {
     public Relacoes() {
         initComponents();
         conjunto3.setEnabled(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -245,7 +246,6 @@ public class Relacoes extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -260,7 +260,7 @@ public class Relacoes extends javax.swing.JFrame {
                             .addComponent(relacaoComposta)
                             .addComponent(operacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(limparCampos))
-                        .addGap(0, 75, Short.MAX_VALUE))))
+                        .addGap(0, 81, Short.MAX_VALUE))))
         );
 
         pack();
@@ -368,17 +368,15 @@ public class Relacoes extends javax.swing.JFrame {
             operacao = operacoes.getSelectedItem().toString();
         }
 
-        //if (campoVazio()) {
-        if ((conjunto3.isEnabled())) {
+        if ((conjunto3.isEnabled()) && campoVazioComposto()) {
 
             Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
             Funcional.relacaoFuncionalComposta(relacao);
-        } else {
+        } else if (campoVazio()) {
 
             Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
             Funcional.relacaoFuncional(relacao);
         }
-        //}
     }//GEN-LAST:event_relacaoFuncionalActionPerformed
 
     private void relacaoInjetoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relacaoInjetoraActionPerformed
@@ -394,11 +392,11 @@ public class Relacoes extends javax.swing.JFrame {
         }
 
         //if (campoVazio()) {
-        if ((conjunto3.isEnabled())) {
+        if ((conjunto3.isEnabled()) && campoVazioComposto()) {
 
             Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
             Injetora.relacaoInjetoraComposta(relacao);
-        } else {
+        } else if (campoVazio()) {
 
             Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
             Injetora.relacaoInjetora(relacao);
@@ -419,11 +417,11 @@ public class Relacoes extends javax.swing.JFrame {
         }
 
         //if (campoVazio()) {
-        if (conjunto3.isEnabled()) {
+        if ((conjunto3.isEnabled()) && campoVazioComposto()) {
 
             Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
             Total.relacaoTotalComposta(relacao);
-        } else {
+        } else if (campoVazio()) {
             Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
             Total.relacaoTotal(relacao);
         }
@@ -443,11 +441,11 @@ public class Relacoes extends javax.swing.JFrame {
         }
 
         //if (campoVazio()) {
-        if (conjunto3.isEnabled()) {
+        if ((conjunto3.isEnabled()) && campoVazioComposto()) {
 
             Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
             Sobrejetora.relacaoSobrejetoraComposta(relacao);
-        } else {
+        } else if (campoVazio()) {
             Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
             Sobrejetora.relacaoSobrejetora(relacao);
         }
@@ -467,11 +465,11 @@ public class Relacoes extends javax.swing.JFrame {
         }
 
         //if (campoVazio()) {
-        if (conjunto3.isEnabled()) {
+        if ((conjunto3.isEnabled()) && campoVazioComposto()) {
 
             Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
             Monomorfismo.relacaoMonomorfismoComposta(relacao);
-        } else {
+        } else if (campoVazio()) {
             Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
             Monomorfismo.relacaoMonomorfismo(relacao);
         }
@@ -486,16 +484,16 @@ public class Relacoes extends javax.swing.JFrame {
             operacao = "quadrado";
         } else if (operacoes.getSelectedItem().toString().equals("√x = y")) {
             operacao = "raizQuadrada";
-        } else {
+        } else if (campoVazio()) {
             operacao = operacoes.getSelectedItem().toString();
         }
 
         //if (campoVazio()) {
-        if (conjunto3.isEnabled()) {
+        if ((conjunto3.isEnabled()) && campoVazioComposto()) {
 
             Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
             Epimorfismo.relacaoEpimorfismoComposta(relacao);
-        } else {
+        } else if (campoVazio()) {
             Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
             Epimorfismo.relacaoEpimorfismo(relacao);
         }
@@ -510,15 +508,15 @@ public class Relacoes extends javax.swing.JFrame {
             operacao = "quadrado";
         } else if (operacoes.getSelectedItem().toString().equals("√x = y")) {
             operacao = "raizQuadrada";
-        } else {
+        } else if (campoVazio()) {
             operacao = operacoes.getSelectedItem().toString();
         }
 
         //if (campoVazio()) {
-        if (conjunto3.isEnabled()) {
+        if ((conjunto3.isEnabled()) && campoVazioComposto()) {
             Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
             Isomorfismo.relacaoIsomorfismoComposta(relacao);
-        } else {
+        } else if (campoVazio()) {
 
             Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
             Isomorfismo.relacaoIsomorfismo(relacao);
