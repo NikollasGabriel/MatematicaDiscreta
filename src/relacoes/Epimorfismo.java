@@ -11,6 +11,6 @@ public class Epimorfismo {
     }
 
     public static void relacaoEpimorfismoComposta(Relacao relacao) {
-
+        return relacaoFuncional(relacao) && relacaoSobrejetora(relacao);
     }
 }

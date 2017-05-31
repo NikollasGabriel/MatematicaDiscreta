@@ -12,10 +12,14 @@ public class Isomorfismo {
         } else {
             return "Não é Monomorfismo";
         }
-
     }
 
-    public static void relacaoIsomorfismoComposta(Relacao relacao) {
+    public static String relacaoIsomorfismoComposta(Relacao relacao) {
+        if (relacaoMonomorfismo(relacao) && relacaoEpimorfismo(relacao)) {
+            return "É Monomorfismo";
+        } else {
+            return "Não é Monomorfismo";
+        }
 
     }
 

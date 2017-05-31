@@ -11,6 +11,6 @@ public class Monomorfismo {
     }
 
     public static void relacaoMonomorfismoComposta(Relacao relacao) {
-
+        return relacaoTotal(relacao) && relacaoInjetora(relacao);
     }
 }
