@@ -21,7 +21,6 @@ public class Funcional extends Relacao {
 
         ArrayList<String> conjuntoA = PadraoLeitura.decompoeElementos(relacao.getConjuntoA());
         ArrayList<String> conjuntoB = PadraoLeitura.decompoeElementos(relacao.getConjuntoB());
-        ArrayList<String> conjuntoC = PadraoLeitura.decompoeElementos(relacao.getConjuntoC());
 
         if (relacao.getRelacao().equals("<")) {
             relacaoExistente = false;
@@ -29,7 +28,6 @@ public class Funcional extends Relacao {
             OUTERMOST:
             for (String elementoA : conjuntoA) {
                 for (String elementoB : conjuntoB) {
-                    for (String elementoC : conjuntoC) {
                         if (Integer.parseInt(elementoA) < Integer.parseInt(elementoB)) {
                             if (!(dominioDefinicao.indexOf(elementoA) >= 0) && !(dominioValores.indexOf(elementoB) >= 0)) {
                                 //Montagem das strings
@@ -44,7 +42,6 @@ public class Funcional extends Relacao {
                             relacaoExistente = false;
                             break OUTERMOST;
                         }
-                    }
                 }
             }
 
