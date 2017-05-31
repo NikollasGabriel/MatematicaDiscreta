@@ -9,11 +9,12 @@ public class Funcional extends Relacao {
     public static boolean relacaoFuncional(Relacao relacao) {
         //Portanto, para R: A -> B funcional, cada elemento de A está relacionado com, no máximo, um elemento de B;
 
-        boolean relacaoExistente = true;
+        boolean relacaoExistente = false;
 
         StringBuilder paresRelacao = new StringBuilder();
         paresRelacao.append("Pares da Relação (").append(relacao.getRelacao()).append(" ,R: ")
-                .append(relacao.getConjuntoA()).append(" -> ").append(relacao.getConjuntoB()).append("):={");
+                .append(PadraoLeitura.nomeConjunto(relacao.getConjuntoA())).append(" -> ").
+                append(PadraoLeitura.nomeConjunto(relacao.getConjuntoB())).append("):={");
 
         StringBuilder dominioDefinicao = new StringBuilder();
         dominioDefinicao.append("Domínio de Definição:={");
@@ -25,9 +26,7 @@ public class Funcional extends Relacao {
         ArrayList<String> conjuntoB = PadraoLeitura.decompoeElementos(relacao.getConjuntoB());
 
         if (relacao.getRelacao().equals("<")) {
-            relacaoExistente = false;
-
-            OUTERMOST:
+ 
             for (String elementoA : conjuntoA) {
                 for (String elementoB : conjuntoB) {
                     if (Integer.parseInt(elementoA) < Integer.parseInt(elementoB)) {
@@ -39,18 +38,12 @@ public class Funcional extends Relacao {
                             //Se atende a condição, a relação existe até o momento
                             relacaoExistente = true;
                         }
-                    } else {
-                        //Se não obedecer a relação, então a relação em si é falsa 
-                        relacaoExistente = false;
-                        break OUTERMOST;
                     }
                 }
             }
 
         } else if (relacao.getRelacao().equals(">")) {
-            relacaoExistente = false;
 
-            OUTERMOST:
             for (String elementoA : conjuntoA) {
                 for (String elementoB : conjuntoB) {
                     if (Integer.parseInt(elementoA) > Integer.parseInt(elementoB)) {
@@ -63,18 +56,12 @@ public class Funcional extends Relacao {
                             //Se atende a condição, a relação existe até o momento
                             relacaoExistente = true;
                         }
-                    } else {
-                        //Se não obedecer a relação, então a relação em si é falsa 
-                        relacaoExistente = false;
-                        break OUTERMOST;
                     }
                 }
             }
 
         } else if (relacao.getRelacao().equals("=")) {
-            relacaoExistente = false;
 
-            OUTERMOST:
             for (String elementoA : conjuntoA) {
                 for (String elementoB : conjuntoB) {
                     if (Integer.parseInt(elementoA) == Integer.parseInt(elementoB)) {
@@ -87,18 +74,12 @@ public class Funcional extends Relacao {
                             //Se atende a condição, a relação existe até o momento
                             relacaoExistente = true;
                         }
-                    } else {
-                        //Se não obedecer a relação, então a relação em si é falsa 
-                        relacaoExistente = false;
-                        break OUTERMOST;
                     }
                 }
             }
 
         } else if (relacao.getRelacao().equals("quadrado")) {
-            relacaoExistente = false;
 
-            OUTERMOST:
             for (String elementoA : conjuntoA) {
                 for (String elementoB : conjuntoB) {
                     if ((Integer.parseInt(elementoA) * Integer.parseInt(elementoA)) == Integer.parseInt(elementoB)) {
@@ -111,18 +92,12 @@ public class Funcional extends Relacao {
                             //Se atende a condição, a relação existe até o momento
                             relacaoExistente = true;
                         }
-                    } else {
-                        //Se não obedecer a relação, então a relação em si é falsa 
-                        relacaoExistente = false;
-                        break OUTERMOST;
                     }
                 }
             }
 
         } else if (relacao.getRelacao().equals("raizQuadrada")) {
-            relacaoExistente = false;
 
-            OUTERMOST:
             for (String elementoA : conjuntoA) {
                 for (String elementoB : conjuntoB) {
                     if (Math.sqrt(Integer.parseInt(elementoA)) == Integer.parseInt(elementoB)) {
@@ -135,10 +110,6 @@ public class Funcional extends Relacao {
                             //Se atende a condição, a relação existe até o momento
                             relacaoExistente = true;
                         }
-                    } else {
-                        //Se não obedecer a relação, então a relação em si é falsa 
-                        relacaoExistente = false;
-                        break OUTERMOST;
                     }
                 }
             }
@@ -175,7 +146,8 @@ public class Funcional extends Relacao {
 
         StringBuilder paresRelacao = new StringBuilder();
         paresRelacao.append("Pares da Relação (").append(relacao.getRelacao()).append(" ,R;S ")
-                .append(relacao.getConjuntoA()).append(" -> ").append(relacao.getConjuntoC()).append("):={");
+                .append(PadraoLeitura.nomeConjunto(relacao.getConjuntoA())).append(" -> ").
+                append(PadraoLeitura.nomeConjunto(relacao.getConjuntoC())).append("):={");
 
         StringBuilder dominioDefinicao = new StringBuilder();
         dominioDefinicao.append("Domínio de Definição:={");
@@ -188,9 +160,7 @@ public class Funcional extends Relacao {
         ArrayList<String> conjuntoC = PadraoLeitura.decompoeElementos(relacao.getConjuntoC());
 
         if (relacao.getRelacao().equals("<")) {
-            relacaoExistente = false;
 
-            OUTERMOST:
             for (String elementoA : conjuntoA) {
                 for (String elementoB : conjuntoB) {
                     for (String elementoC : conjuntoC) {
@@ -207,21 +177,14 @@ public class Funcional extends Relacao {
 
                                 relacaoExistente = true;
 
-                            } else {
-                                //Se não obedecer a relação, então a relação em si é falsa 
-                                relacaoExistente = false;
-                                break OUTERMOST;
                             }
                         }
                     }
                 }
             }
 
-        } else if (relacao.getRelacao()
-                .equals(">")) {
-            relacaoExistente = false;
+        } else if (relacao.getRelacao().equals(">")) {
 
-            OUTERMOST:
             for (String elementoA : conjuntoA) {
                 for (String elementoB : conjuntoB) {
                     for (String elementoC : conjuntoC) {
@@ -237,20 +200,13 @@ public class Funcional extends Relacao {
 
                                 relacaoExistente = true;
                             }
-                        } else {
-                            //Se não obedecer a relação, então a relação em si é falsa 
-                            relacaoExistente = false;
-                            break OUTERMOST;
                         }
                     }
                 }
             }
 
-        } else if (relacao.getRelacao()
-                .equals("=")) {
-            relacaoExistente = false;
+        } else if (relacao.getRelacao().equals("=")) {
 
-            OUTERMOST:
             for (String elementoA : conjuntoA) {
                 for (String elementoB : conjuntoB) {
                     for (String elementoC : conjuntoC) {
@@ -266,20 +222,13 @@ public class Funcional extends Relacao {
 
                                 relacaoExistente = true;
                             }
-                        } else {
-                            //Se não obedecer a relação, então a relação em si é falsa 
-                            relacaoExistente = false;
-                            break OUTERMOST;
                         }
                     }
                 }
             }
 
-        } else if (relacao.getRelacao()
-                .equals("quadrado")) {
-            relacaoExistente = false;
+        } else if (relacao.getRelacao().equals("quadrado")) {
 
-            OUTERMOST:
             for (String elementoA : conjuntoA) {
                 for (String elementoB : conjuntoB) {
                     for (String elementoC : conjuntoC) {
@@ -294,21 +243,14 @@ public class Funcional extends Relacao {
                                 paresRelacao.append("<").append(elementoA).append(",").append(elementoC).append(">,");
 
                                 relacaoExistente = true;
-                            } else {
-                                //Se não obedecer a relação, então a relação em si é falsa 
-                                relacaoExistente = false;
-                                break OUTERMOST;
                             }
                         }
                     }
                 }
             }
 
-        } else if (relacao.getRelacao()
-                .equals("raizQuadrada")) {
-            relacaoExistente = false;
+        } else if (relacao.getRelacao().equals("raizQuadrada")) {
 
-            OUTERMOST:
             for (String elementoA : conjuntoA) {
                 for (String elementoB : conjuntoB) {
                     for (String elementoC : conjuntoC) {
@@ -324,9 +266,6 @@ public class Funcional extends Relacao {
 
                                 relacaoExistente = true;
                             }
-                        } else {
-                            relacaoExistente = false;
-                            break OUTERMOST;
                         }
                     }
                 }

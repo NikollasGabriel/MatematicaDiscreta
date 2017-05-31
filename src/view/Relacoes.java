@@ -39,6 +39,7 @@ public class Relacoes extends javax.swing.JFrame {
      */
     public Relacoes() {
         initComponents();
+        conjunto3.setEnabled(false);
     }
 
     /**
@@ -108,6 +109,11 @@ public class Relacoes extends javax.swing.JFrame {
         relacaoComposta.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 relacaoCompostaItemStateChanged(evt);
+            }
+        });
+        relacaoComposta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                relacaoCompostaActionPerformed(evt);
             }
         });
 
@@ -328,9 +334,9 @@ public class Relacoes extends javax.swing.JFrame {
 
     private void relacaoCompostaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_relacaoCompostaItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
-            conjunto3.setEnabled(false);
-        } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
             conjunto3.setEnabled(true);
+        } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
+            conjunto3.setEnabled(false);
         }
     }//GEN-LAST:event_relacaoCompostaItemStateChanged
 
@@ -361,18 +367,18 @@ public class Relacoes extends javax.swing.JFrame {
         } else {
             operacao = operacoes.getSelectedItem().toString();
         }
-        System.out.println(operacoes.getSelectedItem().toString());
-        System.out.println(conjunto1.getText());
-        System.out.println(conjunto2.getText());
-        if (campoVazio()) {
-            if (conjunto3.isEnabled()) {
-                Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
-                Funcional.relacaoFuncional(relacao);
-            } else {
-                Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
-                Funcional.relacaoFuncionalComposta(relacao);
-            }
+
+        //if (campoVazio()) {
+        if ((conjunto3.isEnabled())) {
+
+            Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
+            Funcional.relacaoFuncionalComposta(relacao);
+        } else {
+
+            Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
+            Funcional.relacaoFuncional(relacao);
         }
+        //}
     }//GEN-LAST:event_relacaoFuncionalActionPerformed
 
     private void relacaoInjetoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relacaoInjetoraActionPerformed
@@ -388,13 +394,15 @@ public class Relacoes extends javax.swing.JFrame {
         }
 
         //if (campoVazio()) {
-            if (conjunto3.isEnabled()) {
-                Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
-                Injetora.relacaoInjetora(relacao);
-            } else {
-                Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
-                Injetora.relacaoInjetoraComposta(relacao);
-            }
+        if ((conjunto3.isEnabled())) {
+
+            Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
+            Injetora.relacaoInjetoraComposta(relacao);
+        } else {
+
+            Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
+            Injetora.relacaoInjetora(relacao);
+        }
         //}
     }//GEN-LAST:event_relacaoInjetoraActionPerformed
 
@@ -411,13 +419,14 @@ public class Relacoes extends javax.swing.JFrame {
         }
 
         //if (campoVazio()) {
-            if (conjunto3.isEnabled()) {
-                Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
-                Total.relacaoTotal(relacao);
-            } else {
-                Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
-                Total.relacaoTotalComposta(relacao);
-            }
+        if (conjunto3.isEnabled()) {
+
+            Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
+            Total.relacaoTotalComposta(relacao);
+        } else {
+            Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
+            Total.relacaoTotal(relacao);
+        }
         //}
     }//GEN-LAST:event_relacaoTotalActionPerformed
 
@@ -434,13 +443,14 @@ public class Relacoes extends javax.swing.JFrame {
         }
 
         //if (campoVazio()) {
-            if (conjunto3.isEnabled()) {
-                Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
-                Sobrejetora.relacaoSobrejetora(relacao);
-            } else {
-                Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
-                Sobrejetora.relacaoSobrejetoraComposta(relacao);
-            }
+        if (conjunto3.isEnabled()) {
+
+            Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
+            Sobrejetora.relacaoSobrejetoraComposta(relacao);
+        } else {
+            Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
+            Sobrejetora.relacaoSobrejetora(relacao);
+        }
         //}
     }//GEN-LAST:event_relacaoSobrejetoraActionPerformed
 
@@ -457,13 +467,14 @@ public class Relacoes extends javax.swing.JFrame {
         }
 
         //if (campoVazio()) {
-            if (conjunto3.isEnabled()) {
-                Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
-                Monomorfismo.relacaoMonomorfismo(relacao);
-            } else {
-                Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
-                Monomorfismo.relacaoMonomorfismoComposta(relacao);
-            }
+        if (conjunto3.isEnabled()) {
+
+            Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
+            Monomorfismo.relacaoMonomorfismoComposta(relacao);
+        } else {
+            Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
+            Monomorfismo.relacaoMonomorfismo(relacao);
+        }
         //}
     }//GEN-LAST:event_relacaoMonomorfismoActionPerformed
 
@@ -480,13 +491,14 @@ public class Relacoes extends javax.swing.JFrame {
         }
 
         //if (campoVazio()) {
-            if (conjunto3.isEnabled()) {
-                Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
-                Epimorfismo.relacaoEpimorfismo(relacao);
-            } else {
-                Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
-                Epimorfismo.relacaoEpimorfismoComposta(relacao);
-            }
+        if (conjunto3.isEnabled()) {
+
+            Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
+            Epimorfismo.relacaoEpimorfismoComposta(relacao);
+        } else {
+            Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
+            Epimorfismo.relacaoEpimorfismo(relacao);
+        }
         //}
     }//GEN-LAST:event_relacaoEpimorfismoActionPerformed
 
@@ -503,15 +515,20 @@ public class Relacoes extends javax.swing.JFrame {
         }
 
         //if (campoVazio()) {
-            if (conjunto3.isEnabled()) {
-                Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
-                Isomorfismo.relacaoIsomorfismo(relacao);
-            } else {
-                Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
-                Isomorfismo.relacaoIsomorfismoComposta(relacao);
-            }
+        if (conjunto3.isEnabled()) {
+            Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), conjunto3.getText(), operacao);
+            Isomorfismo.relacaoIsomorfismoComposta(relacao);
+        } else {
+
+            Relacao relacao = new Relacao(conjunto1.getText(), conjunto2.getText(), operacao);
+            Isomorfismo.relacaoIsomorfismo(relacao);
+        }
         //}
     }//GEN-LAST:event_relacaoIsomorfismoActionPerformed
+
+    private void relacaoCompostaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relacaoCompostaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_relacaoCompostaActionPerformed
 
     /**
      * @param args the command line arguments
